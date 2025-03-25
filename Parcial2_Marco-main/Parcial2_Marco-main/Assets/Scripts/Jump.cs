@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Jump : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Jump : MonoBehaviour
     private float jumpTimeCounter;
     private bool buttonPressed;
     private bool canJump = true;
+    [SerializeField]
+    private UnityEvent _play;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,6 +51,7 @@ public class Jump : MonoBehaviour
             jumpTimeCounter = maxJumpTime;
             rb.linearVelocity = Vector3.up * jumpForce;
             isGrounded = false;
+            _play?.Invoke();
         }
     }
 

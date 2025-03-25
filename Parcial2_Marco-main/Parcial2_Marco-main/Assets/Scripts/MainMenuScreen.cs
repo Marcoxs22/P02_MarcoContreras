@@ -6,6 +6,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField]
     private UnityEvent onStartGame;
     
+    
     private void Start()
     {
         onStartGame?.Invoke();   
@@ -19,4 +20,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         screen.SetActive(false);
     }
+
+  
+
 }
