@@ -5,9 +5,13 @@ public class PlayerCollission : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent onPlayerLose;
+    [SerializeField]
+    private UnityEvent<Transform> onObstacleDestroyed;
+    [SerializeField]
+    private UnityEvent<Transform> onCollisionDie;
     private Dash dash;
 
-    private int obstacleCollisions = 0; // Contador de colisiones con obstáculos
+    private int obstacleCollisions = 0; // Contador de colisiones con obstï¿½culos
 
 
     private void Start()
@@ -21,18 +25,13 @@ public class PlayerCollission : MonoBehaviour
         {
             if (dash.IsDashing)
             {
+                onObstacleDestroyed?.Invoke(transform);
                 Destroy(collision.gameObject);
             }
             else
             {
-                if (obstacleCollisions < 2)
-                {
-                    obstacleCollisions++; // Incrementa el contador, pero no pierde aún
-                }
-                else
-                {
-                    onPlayerLose?.Invoke();
-                }
+                onCollisionDie?.Invoke(transform);
+                onPlayerLose?.Invoke();
             }
         }
     }
@@ -41,6 +40,7 @@ public class PlayerCollission : MonoBehaviour
     {
         if(other.CompareTag("DeadZone"))
         {
+            onCollisionDie?.Invoke(transform);
             onPlayerLose?.Invoke();
             SoundManager.instance.Play("smash");
         }
