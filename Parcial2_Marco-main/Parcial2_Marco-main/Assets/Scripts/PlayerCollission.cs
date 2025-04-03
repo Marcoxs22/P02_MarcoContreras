@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,8 @@ public class PlayerCollission : MonoBehaviour
     private UnityEvent<Transform> onObstacleDestroyed;
     [SerializeField]
     private UnityEvent<Transform> onCollisionDie;
+    [SerializeField]
+    private UnityEvent onCoinCollected;
     private Dash dash;
 
     private int obstacleCollisions = 0; // Contador de colisiones con obst�culos
@@ -43,6 +46,11 @@ public class PlayerCollission : MonoBehaviour
             onCollisionDie?.Invoke(transform);
             onPlayerLose?.Invoke();
             SoundManager.instance.Play("smash");
+        }
+        else if(other.CompareTag("Coin"))
+        {
+            other.gameObject.SetActive(false);
+            onCoinCollected?.Invoke();
         }
     }
 }
