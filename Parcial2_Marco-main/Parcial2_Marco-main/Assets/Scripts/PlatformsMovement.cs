@@ -11,6 +11,8 @@ public class PlatformsMovement : MonoBehaviour
     private float speedIncrease = 2f;
     [SerializeField]
     private UnityEvent <int> onScoreChanged;
+    [SerializeField]
+    private float scoreValue = 1f;
     private bool canMove = true;
     public bool CanMove {set => canMove = value; }
     private Vector3 startingPosition;
@@ -54,7 +56,7 @@ public class PlatformsMovement : MonoBehaviour
         Vector3 distanceToMove = Vector3.left * speed * Time.deltaTime;
         transform.position += distanceToMove;
         moveDistance += distanceToMove;
-        onScoreChanged?.Invoke(Math.Abs((int)moveDistance.x));
+        onScoreChanged?.Invoke(Math.Abs((int)scoreValue));
     }
 
 
