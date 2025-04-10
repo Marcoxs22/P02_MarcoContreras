@@ -9,7 +9,7 @@ public class MainMenuScreen : MonoBehaviour
     
     private void Start()
     {
-        onStartGame?.Invoke();   
+        onStartGame?.Invoke();  
     }
     public void ShowScreen(GameObject screen)
     {

@@ -20,6 +20,8 @@ public class Jump : MonoBehaviour
     private bool canJump = true;
     [SerializeField]
     private UnityEvent _play;
+    [SerializeField]
+    private UnityEvent _onLand;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,6 +91,7 @@ public class Jump : MonoBehaviour
         {
             RestartJumps();
             isGrounded = true;
+            _onLand?.Invoke();
         }        
     }
 }
